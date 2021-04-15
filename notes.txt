@@ -49,6 +49,7 @@ Functional
         Higher Order Functions
             Functions can be passed as arguments to other functions (like objects)
             Functions can be returned as return value from other functions (like objects)
+        Functions are variadic
     Functions are called as "callable objects"
 
 
@@ -102,3 +103,22 @@ describe("A Calculator", function(){
             expect(actualResult).toBe(expectedResult);
     });
 })
+
+Implicit values in function
+    - this
+    - arguments
+        array like object containing all the arguments passed to the function
+            arguments.length
+            arguments[index]
+
+In JavaScript
+    It doesnot matter WHERE the function is (or) WHO owns the function
+    What matters is HOW the function is invoked!!
+
+Function invocation patterns (6 ways)
+    When a function is invoked as a method of an object(obj)
+        this -> obj
+    When a function is invoked as a 'function'
+        this -> global (window)
+    Using the 'call' method of the function
+    Using the 'apply' method of the function
