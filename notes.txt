@@ -1,0 +1,104 @@
+Magesh Kuppan
+
+Name
+Primary Skillset
+Experience in JavaScript
+
+Methodolgy
+
+Schedule
+    Session 1 - 1:30 Hrs
+    Tea Break - 10 Mins
+    Session 2 - 1:30 Hrs
+    Lunch Break - 40 Mins
+    Session 3 - 1:30 Hrs
+    Tea Break - 10 Mins
+    Session 4 - 1:30 Hrs
+
+Repository
+
+CoffeeScript
+TypeScript
+Script#
+
+ES5
+ES6 (ES2015/ESNext/ECMAScript6)
+
+ES5
+    DataTypes
+        number, string, boolean
+        undefined, object, function
+
+    Programming Constructs
+        var, if else, switch case, for, for in, while, try catch finally, throw, function
+
+    APIs
+        Date, Array, Math, RegEx, Error, timer (setTimeout, clearTimeout, setInterval, clearInterval)
+
+    Unique Aspects
+
+Line Oriented
+Procedural 
+Object Based 
+Object Oriented
+Functional
+    Functions are first class citizens (like data)
+        Functions can be created like objects
+        Functions can have attributes like objects
+        Functions can have methods like objects
+        Higher Order Functions
+            Functions can be passed as arguments to other functions (like objects)
+            Functions can be returned as return value from other functions (like objects)
+    Functions are called as "callable objects"
+
+
+static
+dynamic
+
+strongly typed
+loosely typed
+
+
+add(10,20)
+add(10,"20")
+add(10, "abc")
+add([10,20],[30,40])
+add([10,20],[30,"40"])
+add([10,20],[30,"abc"])
+add([10,20],[30,[40,"abc"]])
+add(funtion(){ return 10;}, function(){ return 20;})
+add(function(){ return [10,20];}, function(){ return [30,[40,"abc"]]})
+add(10)
+add()
+add(10,20,30,40,50)
+add([function(){ return [10,20];}, function(){ return [30,[40,"abc"]]}])
+
+function add(x,y){
+    if (typeof x !== 'number' || typeof y !== 'number')
+        throw new Error('Invalid argument(s)!')
+    return x + y;
+}
+
+jQuery(domNode)
+jQuery([dn1, dn2])
+jQuery(string)
+jQuery(fn) => shortcut of jQuery(document).ready(fn)
+jQuery(jQueryObj)
+
+jasmine (BDD framework)
+    describe (test class), it (test case), expect (assert)
+
+describe("A Calculator", function(){
+    it("Should add 2 numbers", function(){
+        //Arrange
+            var n1 = 10,
+                n2 = 20,
+                expectedResult = 30;
+
+        //Act
+            var actualResult = add(n1, n2);
+
+        //Assert
+            expect(actualResult).toBe(expectedResult);
+    });
+})
