@@ -123,3 +123,11 @@ Function invocation patterns (6 ways)
     Using the 'call' method of the function
     Using the 'apply' method of the function
     As an 'Immediately Invoked Function Expression' - IIFE
+
+Memoziation
+    A technique by which the result of the function is memorized to avoid invocation repeatedly
+
+Pure functions
+    A function is called as a pure function if the invocation of the function can be replaced by the result of the function without affecting the final outcome.
+
+    A function without side effects
