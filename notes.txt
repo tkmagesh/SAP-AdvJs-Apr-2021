@@ -122,3 +122,4 @@ Function invocation patterns (6 ways)
         this -> global (window)
     Using the 'call' method of the function
     Using the 'apply' method of the function
+    As an 'Immediately Invoked Function Expression' - IIFE
