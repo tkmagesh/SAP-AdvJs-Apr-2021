@@ -63,4 +63,30 @@
     }
 
     globalThis['addAsyncPromiseClient'] = addAsyncPromiseClient;
+
+    function divideAsyncPromise(x,y){
+        console.log(`   [@service] processing ${x} and ${y}`);
+        return new Promise(function(resolveFn, rejectFn){
+            //async operation
+            setTimeout(function(){
+                if (y === 0)
+                    return rejectFn(new Error('Invalid arguments'));
+                const result = x / y;
+                console.log(`   [@service] returning result`);
+                resolveFn(result);
+            }, 4000);
+        });
+    }
+
+    async function divideAsyncPromiseClient(x,y){
+        try {
+            console.log(`[@client] triggering the service`);
+            var result = await divideAsyncPromise(x,y);
+            console.log(`[@client] result = ${result}`)
+        } catch (err){
+            console.log('something went wrong..', err);
+        }
+    }
+
+    globalThis['divideAsyncPromiseClient'] = divideAsyncPromiseClient;
 })();
