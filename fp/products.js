@@ -14,6 +14,14 @@ function useCase(title, fn){
     console.groupEnd();
 }
 
+function printGroup(groupedObj){
+    for(var key in groupedObj){
+        useCase('Key - [' + key + ']', function(){
+            console.table(groupedObj[key]);
+        });
+    }
+}
+
 useCase("Products List", function(){
     console.table(products);
 });
@@ -219,10 +227,46 @@ useCase("Filter", function(){
 
 useCase("GroupBy", function(){
     useCase("Products grouped by category", function(){
-        function groupProductsByCategory(/*  */){
-
+        function groupProductsByCategory(products){
+            var result = {};
+            for(var i=0; i<products.length; i++){
+                var key = products[i].category;
+                if (typeof result[key] === 'undefined')
+                    result[key] = [];
+                result[key].push(products[i])
+            }
+            return result;
         }
-        var productsByCategory = groupProductsByCategory(/*  */);
-        console.log(productsByCategory);
-    })
+        var productsByCategory = groupProductsByCategory(products);
+        printGroup(productsByCategory);
+    });
+
+    useCase('Any list by any key', function(){
+        function groupBy(list, keySelector){
+            var result = {};
+            for(var i=0; i<list.length; i++){
+                var key = keySelector(list[i]);
+                if (typeof result[key] === 'undefined')
+                    result[key] = [];
+                result[key].push(list[i])
+            }
+            return result;
+        };
+
+        useCase("products by cost", function(){
+            var keySelectorByCost = function(product){
+                return product.cost > 50 ? 'costly' : 'affordable';
+            };
+            var productsByCost = groupBy(products, keySelectorByCost);
+            printGroup(productsByCost);
+        })
+
+        useCase("products by units", function(){
+            var keySelectorByUnits = function(product){
+                return product.units <= 60 ? 'underStocked' : 'wellStocked';
+            };
+            var productsByUnits = groupBy(products, keySelectorByUnits);
+            printGroup(productsByUnits);
+        });
+    });
 });
