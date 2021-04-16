@@ -98,23 +98,33 @@ useCase("Sort", function(){
                     }
         }
 
+        function getDescComparer(comparer){
+            return function(){
+                return comparer.apply(this,arguments) * -1;
+            }
+        }
+
         useCase('Products by name [attrName]', function(){
             sort(products, 'name')
             console.table(products);
         });
 
+        var productsComparerByValue = function(p1, p2){
+            var p1Value = p1.cost * p1.units,
+                p2Value = p2.cost * p2.units;
+            if (p1Value < p2Value) return -1;
+            if (p1Value > p2Value) return 1;
+            return 0;
+        };
         useCase("Products by value [cost * units] [comparerFn]", function(){
-            var productsComparerByValue = function(p1, p2){
-                var p1Value = p1.cost * p1.units,
-                    p2Value = p2.cost * p2.units;
-                if (p1Value < p2Value) return -1;
-                if (p1Value > p2Value) return 1;
-                return 0;
-            }
             sort(products, productsComparerByValue);
             console.table(products);
         });
-
+        useCase("Products by value [cost * units] [comparerFn] in descending order", function(){
+            var descProductComparerByValue = getDescComparer(productsComparerByValue);
+            sort(products, descProductComparerByValue);
+            console.table(products);
+        });
 
     })
 });
