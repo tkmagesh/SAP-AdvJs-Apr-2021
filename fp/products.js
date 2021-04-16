@@ -215,4 +215,14 @@ useCase("Filter", function(){
         //filter affordable products
         //filter well stocked products
     })
-})
+});
+
+useCase("GroupBy", function(){
+    useCase("Products grouped by category", function(){
+        function groupProductsByCategory(/*  */){
+
+        }
+        var productsByCategory = groupProductsByCategory(/*  */);
+        console.log(productsByCategory);
+    })
+});
