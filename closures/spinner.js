@@ -36,3 +36,4 @@ spinner.up() //=> SHOULD NOT return 10001
 count = 10000
 spinner.up() //=> SHOULD NOT return 10001
 */
+

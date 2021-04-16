@@ -149,4 +149,6 @@ DONOT use __proto__ in your code
             Coz, Hiding something is costly in JavaScript
             Why?
     2. How do we access the base object?
+        Constructor.prototype
+
     
