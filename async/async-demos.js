@@ -30,7 +30,37 @@
         });
     }
 
+    /* http://callbackhell.com/ */
+
     globalThis['addAsyncClient'] = addAsyncClient;
 
 
+    function addAsyncPromise(x,y){
+        console.log(`   [@service] processing ${x} and ${y}`);
+        return new Promise(function(resolveFn, rejectFn){
+            //async operation
+            setTimeout(function(){
+                const result = x + y;
+                console.log(`   [@service] returning result`);
+                resolveFn(result);
+            }, 4000);
+        });
+    }
+
+    /* function addAsyncPromiseClient(x,y){
+        console.log(`[@client] triggering the service`);
+        var p = addAsyncPromise(x,y);
+        p.then(function(result){
+            console.log(`[@client] result = ${result}`)
+        });
+    } */
+
+    
+    async function addAsyncPromiseClient(x,y){
+        console.log(`[@client] triggering the service`);
+        var result = await addAsyncPromise(x,y);
+        console.log(`[@client] result = ${result}`)
+    }
+
+    globalThis['addAsyncPromiseClient'] = addAsyncPromiseClient;
 })();
