@@ -203,3 +203,51 @@ ES6 (ES2015 / ESNext/ ECMAScript6)
             this.benefits = benefits;
         }
     }
+
+13. Template strings
+14. Iterables
+    For Arrays:
+        var nos = [3,1,4,2,5]
+        =======
+        var iter = nos[Symbol.iterator]()
+        while(true){
+            var item = iter.next();
+            if (item.done)
+                break;
+            console.log(item.value);
+        }
+        ======
+        for(let no of nos){
+            console.log(no)
+        }
+
+    For custom objects:
+    let range = {
+        from : 1,
+        to : 5,
+        [Symbol.Iterator] = function(){
+            return {
+                current : this.from,
+                last : this.to,
+                next(){
+                    if (this.current <= this.last){
+                        return { done : false, value : this.current++}
+                    } else {
+                        return { done : true }
+                    }
+                }
+            };
+        }
+    }
+    
+
+
+JavaScript Modules
+    CommonJS (node.js)
+    AMD (Asynchronous Module Definition) - require.js
+        require('moduleName', [dep1, dep2], function(dep1, dep2){
+            return {
+                name
+            };
+        });
+    ES6 MODULES
