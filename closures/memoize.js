@@ -32,8 +32,11 @@ function memoize(fn){
     var cache = {};
     return function(){
         var key = JSON.stringify(arguments);
+        /* 
         if (cache.hasOwnProperty(key))
-            return cache[key];
+            return cache[key]; 
+        */
+        cache[key] = cache[key] ?? [];
         cache[key] = fn.apply(this, arguments);
         return cache[key];
     }

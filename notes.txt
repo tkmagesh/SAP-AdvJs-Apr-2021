@@ -239,8 +239,20 @@ ES6 (ES2015 / ESNext/ ECMAScript6)
             };
         }
     }
-    
 
+15. generator functions   
+        Suspend and resume the execution of a function
+
+    function *getNos(){
+        yield 10;
+        yield 20;
+        yield 30;
+        yield 40;
+    }
+    var iter = getNos()
+
+16. globalThis
+17. null coalescing operator
 
 JavaScript Modules
     CommonJS (node.js)
@@ -251,3 +263,11 @@ JavaScript Modules
             };
         });
     ES6 MODULES
+
+Truthy & Falsy
+    If the boolean equivalent of a value is true -> Truthy (all values except falsy values)
+    If the boolean equivalent of a value is false -> Falsy (0, '', null, undefined, NaN, false)
+
+
+Async Operation
+    An operation that is initiated but not waited for its completion
