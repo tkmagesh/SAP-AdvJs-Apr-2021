@@ -133,17 +133,27 @@ useCase("Filter", function(){
     })
 
     useCase('Filter Any list by any condition', function(){
-        function filter(/*  */){
-
+        function filter(list, predicate){
+            var result = [];
+            for(var i=0; i<list.length; i++)
+                if (predicate(list[i]))
+                    result.push(list[i])
+            return result;
         }
         useCase('Costly products [cost > 50]', function(){
-            filter();
-            console.table(products);
+            var costlyProductPredicate = function(product){
+                return product.cost > 50;
+            }
+            var costlyProducts = filter(products, costlyProductPredicate);
+            console.table(costlyProducts);
         });
 
         useCase('Understocked products [ units <= 60 ]', function(){
-            filter();
-            console.table(products);
+            var underStockedProductPredicate = function(product){
+                return product.units <= 60;
+            };
+            var underStockedProducts = filter(products, underStockedProductPredicate);
+            console.table(underStockedProducts);
         })
     })
 })
