@@ -138,4 +138,15 @@ Constructor Functions
         => this -> new object
         => this -> returned by default
 
+Inheritance (Prototypal Inheritance)
+    Prototype Hopping
+        The process by which the runtime resolves an attribute by tracing the __proto__ chain
+        - Happens only when an attribute value is 'READ'
+        - This doesn't happen when a new value is 'WRITTEN'
+
+DONOT use __proto__ in your code
+    1. Then, why is it accessible?
+            Coz, Hiding something is costly in JavaScript
+            Why?
+    2. How do we access the base object?
     
