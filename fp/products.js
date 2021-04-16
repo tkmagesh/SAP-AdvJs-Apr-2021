@@ -154,6 +154,9 @@ useCase("Filter", function(){
             };
             var underStockedProducts = filter(products, underStockedProductPredicate);
             console.table(underStockedProducts);
-        })
+        });
+
+        //filter affordable products
+        //filter well stocked products
     })
 })
