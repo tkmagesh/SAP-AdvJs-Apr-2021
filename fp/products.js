@@ -74,4 +74,76 @@ useCase("Sort", function(){
             console.table(products);
         });
     });
+
+    useCase("Sort any list by attrName/comparer", function(){
+        function sort(list, comparer){
+            var comparerFn;
+            if (!(typeof comparer === 'function' || typeof comparer === 'string')) return;
+            if (typeof comparer === 'function'){
+                comparerFn = comparer;
+            }
+            if (typeof comparer === 'string'){
+                comparerFn = function(o1, o2){
+                    if (o1[comparer] < o2[comparer]) return -1;
+                    if (o1[comparer] > o2[comparer]) return 1;
+                    return 0;
+                };
+            }
+            for(var i=0; i < list.length -1; i++)
+                for(var j=i+1; j<list.length; j++)
+                    if (comparerFn(list[i], list[j]) > 0 ){
+                        var temp = list[i];
+                        list[i] = list[j];
+                        list[j] = temp;
+                    }
+        }
+
+        useCase('Products by name [attrName]', function(){
+            sort(products, 'name')
+            console.table(products);
+        });
+
+        useCase("Products by value [cost * units] [comparerFn]", function(){
+            var productsComparerByValue = function(p1, p2){
+                var p1Value = p1.cost * p1.units,
+                    p2Value = p2.cost * p2.units;
+                if (p1Value < p2Value) return -1;
+                if (p1Value > p2Value) return 1;
+                return 0;
+            }
+            sort(products, productsComparerByValue);
+            console.table(products);
+        });
+
+
+    })
 });
+
+useCase("Filter", function(){
+    useCase("Filtering stationary products", function(){
+        function filterStationaryProducts(){
+            var result = [];
+            for(var i=0; i<products.length; i++)
+                if (products[i].category === 'stationary')
+                    result.push(products[i])
+            return result;
+        }
+        var stationaryProducts = filterStationaryProducts();
+        console.table(stationaryProducts);
+    })
+
+    useCase('Filter Any list by any condition', function(){
+        function filter(/*  */){
+
+        }
+        useCase('Costly products [cost > 50]', function(){
+            filter();
+            console.table(products);
+        });
+
+        useCase('Understocked products [ units <= 60 ]', function(){
+            filter();
+            console.table(products);
+        })
+    })
+})
