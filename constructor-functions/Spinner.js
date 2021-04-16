@@ -22,3 +22,23 @@ Spinner.prototype.up = function up() {
 Spinner.prototype.down = function down() {
     return ++this.__count__;
 }
+
+//using Symbols
+
+let Spinner = (() => {
+    var countSymbol = Symbol('count');
+
+    function Spinner(){
+        this[countSymbol] = 0;
+    }
+
+    Spinner.prototype.up = function up() {
+        return ++this[countSymbol];
+    }
+
+    Spinner.prototype.down = function down() {
+        return ++this[countSymbol];
+    }
+
+    return Spinner;
+})();

@@ -45,9 +45,7 @@ useCase("Sort", function(){
             for(var i=0; i < list.length -1; i++)
                 for(var j=i+1; j<list.length; j++)
                     if (list[i][attrName] > list[j][attrName]){
-                        var temp = list[i];
-                        list[i] = list[j];
-                        list[j] = temp;
+                        [list[i], list[j]] = [list[j], list[i]]
                     }
         }
         useCase('Products by cost', function(){
@@ -65,9 +63,7 @@ useCase("Sort", function(){
             for(var i=0; i < list.length -1; i++)
                 for(var j=i+1; j<list.length; j++)
                     if (comparerFn(list[i], list[j]) > 0 ){
-                        var temp = list[i];
-                        list[i] = list[j];
-                        list[j] = temp;
+                        [list[i], list[j]] = [list[j], list[i]]
                     }
         }
         useCase("Products by value [cost * units]", function(){
@@ -100,9 +96,7 @@ useCase("Sort", function(){
             for(var i=0; i < list.length -1; i++)
                 for(var j=i+1; j<list.length; j++)
                     if (comparerFn(list[i], list[j]) > 0 ){
-                        var temp = list[i];
-                        list[i] = list[j];
-                        list[j] = temp;
+                        [list[i], list[j]] = [list[j], list[i]]
                     }
         }
 
@@ -159,15 +153,15 @@ useCase("Filter", function(){
             return result;
         }
 
-        function negate(predicateFn){
+        /* function negate(predicateFn){
             return function(){
                 return !predicateFn.apply(this, arguments);
             }
-        }
+        } */
+        var negate = predicateFn => (...args) => !predicateFn(...args);
+
         useCase('Filter products by cost', function(){
-            var costlyProductPredicate = function(product){
-                return product.cost > 50;
-            }
+            var costlyProductPredicate = product => product.cost > 50;
             useCase('Costly products [cost > 50]', function(){
                 var costlyProducts = filter(products, costlyProductPredicate);
                 console.table(costlyProducts);
@@ -201,9 +195,8 @@ useCase("Filter", function(){
         });
         
         useCase("Filter products by units", function(){
-            var underStockedProductPredicate = function(product){
-                return product.units <= 60;
-            };
+            var underStockedProductPredicate = product => product.units <= 60;
+
             useCase('Understocked products [ units <= 60 ]', function(){
                 var underStockedProducts = filter(products, underStockedProductPredicate);
                 console.table(underStockedProducts);
@@ -254,17 +247,13 @@ useCase("GroupBy", function(){
         };
 
         useCase("products by cost", function(){
-            var keySelectorByCost = function(product){
-                return product.cost > 50 ? 'costly' : 'affordable';
-            };
+            var keySelectorByCost = product => product.cost > 50 ? 'costly' : 'affordable';
             var productsByCost = groupBy(products, keySelectorByCost);
             printGroup(productsByCost);
         })
 
         useCase("products by units", function(){
-            var keySelectorByUnits = function(product){
-                return product.units <= 60 ? 'underStocked' : 'wellStocked';
-            };
+            var keySelectorByUnits = product => product.units <= 60 ? 'underStocked' : 'wellStocked';
             var productsByUnits = groupBy(products, keySelectorByUnits);
             printGroup(productsByUnits);
         });

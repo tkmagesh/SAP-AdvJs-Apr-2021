@@ -151,4 +151,55 @@ DONOT use __proto__ in your code
     2. How do we access the base object?
         Constructor.prototype
 
+ES6 (ES2015 / ESNext/ ECMAScript6)
+1. let
+2. const
+3. Array destructuring
+4. Rest operator (Array)
+5. Spread operator (Array)
+6. Object destructuring
+7. Rest operator (Object)
+8. Spread operator (Object)
+9. default arguments
+10. arrow functions
+        /*
+            //function statement
+            function add(x,y){
+                return x + y;
+            }
+
+            //function expression
+            var add = function(x,y){
+                return x + y;
+            }
+
+            var add = (x,y) => {
+                return x + y;
+            }
+            */
+            var add = (x,y) => x + y;
+11. Symbols
+12. Classes & Inheritance
+    class Employee{
+        id = 0;
+        name = '';
+        salary = 0;
+
+        constructor(id, name, salary){
+            this.id = id;
+            this.name = name;
+            this.salary = salary;
+        }
+
+        display(){
+            console.log(`Id = ${this.id}, name = ${this.name} and salary = ${this.salary}`)
+        }
+    }
     
+    class FulltimeEmployee extends Employee{
+        benefits = '';
+        constructor(id, name, salary, benefits){
+            super(id, name, salary);
+            this.benefits = benefits;
+        }
+    }
