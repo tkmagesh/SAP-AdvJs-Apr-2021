@@ -140,21 +140,67 @@ useCase("Filter", function(){
                     result.push(list[i])
             return result;
         }
-        useCase('Costly products [cost > 50]', function(){
+
+        function negate(predicateFn){
+            return function(){
+                return !predicateFn.apply(this, arguments);
+            }
+        }
+        useCase('Filter products by cost', function(){
             var costlyProductPredicate = function(product){
                 return product.cost > 50;
             }
-            var costlyProducts = filter(products, costlyProductPredicate);
-            console.table(costlyProducts);
-        });
+            useCase('Costly products [cost > 50]', function(){
+                var costlyProducts = filter(products, costlyProductPredicate);
+                console.table(costlyProducts);
+            });
 
-        useCase('Understocked products [ units <= 60 ]', function(){
+            /* 
+            useCase('Affordable products [cost <= 50]', function(){
+                var affordableProductPredicate = function(product){
+                    return product.cost <= 50;
+                };
+                var affordablePrducts = filter(products, affordableProductPredicate);
+                console.table(affordablePrducts);
+            }); 
+            */
+            
+           /*  
+           useCase('Affordable products [!costly product]', function(){
+                var affordableProductPredicate = function(product){
+                    return !costlyProductPredicate(product);
+                };
+                var affordablePrducts = filter(products, affordableProductPredicate);
+                console.table(affordablePrducts);
+            }); 
+            */
+
+             useCase('Affordable products [!costly product]', function(){
+                var affordableProductPredicate = negate(costlyProductPredicate);
+                var affordablePrducts = filter(products, affordableProductPredicate);
+                console.table(affordablePrducts);
+            });
+        });
+        
+        useCase("Filter products by units", function(){
             var underStockedProductPredicate = function(product){
                 return product.units <= 60;
             };
-            var underStockedProducts = filter(products, underStockedProductPredicate);
-            console.table(underStockedProducts);
+            useCase('Understocked products [ units <= 60 ]', function(){
+                var underStockedProducts = filter(products, underStockedProductPredicate);
+                console.table(underStockedProducts);
+            });
+
+            useCase('Well stocked products [ !understocked product ]', function(){
+                /* var wellStockedProductPredicate = function(product){
+                    return !underStockedProductPredicate(product);
+                }; */
+                var wellStockedProductPredicate = negate(underStockedProductPredicate);
+                var wellStockedProducts = filter(products, wellStockedProductPredicate);
+                console.table(wellStockedProducts);
+            });
         });
+
 
         //filter affordable products
         //filter well stocked products
